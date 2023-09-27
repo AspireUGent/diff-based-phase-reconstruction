@@ -1,7 +1,7 @@
 <html lang="en">
 
 <head>
-<title>Supplementary Samples</title>
+<title>Audio Samples</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#ffffff">
 <style>
@@ -62,14 +62,10 @@
   }
   
   th {
-    text-align: center;
-  	background-color: #3265C2;
-  	color: white;
-  	height: 30px;
-  }
-
-  td {
-    text-align: center;
+    align: center;
+	background-color: #3265C2;
+	color: white;
+	height: 30px;
   }
   
   tr {
@@ -88,12 +84,6 @@
     z-index: 100;
   }
 
-  .reference{
-    font-family: 'Times New Roman';
-    font-size: 12;
-  }
-
-
 </style>
 </head>
 
@@ -105,8 +95,8 @@
    <div class="row">
     <div class="logo"><img src=".\img\logo_ugent_nl.svg"></div>
     <div class="banner">
-      <h1 class="closer">ASPIRE</h1>
-      <p class="closer" style="font-size: 80%;">Audio and Signal Processing, Interpretation, and Enhancement@IDLAB</p>
+      <h1 class="closer">ASPIRE@IDLAB</h1>
+      <p class="closer" style="font-size: 80%;">Audio and Signal Processing, Interpretation, and Enhancement</p>
     </div>
   </div>
 
@@ -116,57 +106,30 @@
   <h3>Audio samples </h3>
   <div>
 
-    This is the sample page for our paper <em>'Aiding speech harmonic recovery in DNN-based single channel noise reduction using cepstral excitation manipulation (CEM) components'</em> accepted by ICASSP 2023.<br/>
-    <code>
-    @inproceedings{song2023aiding,<br/>
-        title={Aiding Speech Harmonic Recovery in DNN-Based Single Channel Noise Reduction Using Cepstral Excitation Manipulation (CEM) Components},<br/>
-        author={Song, Yanjue and Madhu, Nilesh},<br/>
-        booktitle={ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},<br/>
-        pages={1--5},<br/>
-        year={2023},<br/>
-        organization={IEEE}<br/>
-      }
+    This is the sample page for our submission <em>'Phase reconstruction in single channel speech enhancement based on phase gradients and estimated clean-speech amplitudes'</em> to ICASSP 2024.<br/>
+    <!-- Reference: <br/>
+    <code>@article{}
     </code>
+    <br/> -->
     <br/>
-    <br/>
-    
-    We present here two sets of supplementary samples for our <a href="https://yanjuesong.github.io/CEM-loss-samples/">main demo page</a> to show the generalisation ability of the proposed loss function component. <br/>
-    The first set is the same network trained on a more diverse dataset (~140 hours noisy speech from DNS challenge without reverberation) <em>without</em> hyperparamter re-finetuning. In general, the networks delivery better performance, and a similar trend among variants can be observed on those samples.<br/>
-    The second set demonstrates the improvement of the CEM loss on a faithful implementation of the CRUSE net [1], which is trained on a signal-based loss. The benefit of CEM loss on harmonic recovery can still be observed with a different loss function.<br/>
-    <br/>
+    First, we present the synthetic phase retrived by the algorithm proposed in [1] from the estimated clean speech magnitude, in comparison with the noisy phase. The full synthetic phase sounds artifical. 
 
-    All samples have been rescaled to –26 dBov individually based on the active speech level (ASL). <br/>
-	  <br/>
-
-    The samples below are processed by:
-    <ul>
-      <li><strong>Baseline 1: Basic</strong>: CRUSE net [1] predicting log-mask, all the following networks have the same architecture and training target;</li>
-      <li><strong>Baseline 2: HAMSE</strong>: Trained with the loss function proposed in [2];</li>
-      <li><strong>2CEM</strong>: Trained with the proposed CEM loss on the spectral estimate, &beta;=2;</li>
-      <li><strong>adpCEM</strong>: Trained with the proposed CEM loss on the spectral estimate with an adaptive &beta;;</li>
-      <li><strong>maskCEM</strong>: Trained with the proposed CEM loss on the mask estimate, &beta;=1.2;</li>
-      </ul>
-	<br/>
-  
   </div>
 	
   <div>
-    <p style="color:#003366; list-style-type:disc; font-size=8; font-style: italic;">
+    <!-- <p style="color:#003366; list-style-type:disc; font-size=8; font-style: italic;">
 	  Hover your mouse on the spectrogram to check the noisy input. <br/>
 	  Click the spectrogram to enlarge/reset it.
     </p>
-	
-    <table class="tb" id="samples" style="margin-top:10px; margin-bottom:20px;">
+	 -->
+    <table class="tb" id="samplesSyn" style="margin-top:10px; margin-bottom:20px;">
       <thead>
       <tr>
         <th>Methods</th>
         <th>Noisy input</th>
-        <th>Baseline 1: Basic</th>
-        <th>Baseline 2: HAMSE</th>
-        <th>2CEM</th>
-        <th>adpCEM</th>
-        <th>maskCEM</th>
-        <!-- <th>adpmaskCEM</th> -->
+        <th>Real CRUSE</th>
+        <th>Real CRUSE-synthetic</th>
+        <th>Real CRUSE-agnostic</th>
         <th>Clean ref</th>
       </tr>
       </thead>
@@ -175,146 +138,51 @@
 	</table>
   </div>
 
+  <br/>
 
-  <div>
-    The samples below are processed by:
-    <ul>
-        <li><strong>Baseline 1</strong>: a faithful implementation of the CRUSE net [1], trained by the signal-domain loss to predict the linear mask;</li>
-        <li><strong>CEM</strong>: the same CRUSE net trained with the signal-domain loss in combination of the proposed CEM loss, &beta;=2;</li>
-        </ul>
-    <br/>
-    
+    <div>
+
+    Now, we focus on the difference between the noisy phase and the estimated phase. Two baselines are provided here, real-CRUSE which predicts a real-valued magnitude mask from noisy magnitude, and complex-CRUSE, which predicts a complex mask from real- and imaginary noisy STFT coefficients. The performance upper bound, the signal composed of the estimated magnitude and the clean signal phase, is also provided for reference. 
+
   </div>
-
-
+  
   <div>
-    
-    <table class="tb" id="cruseSamples" style="margin-top:10px; margin-bottom:20px;">
+    <!-- <p style="color:#003366; list-style-type:disc; font-size=8; font-style: italic;">
+    Hover your mouse on the spectrogram to check the noisy input. <br/>
+    Click the spectrogram to enlarge/reset it.
+    </p>
+   -->
+    <table class="tb" id="samplesAgn" style="margin-top:10px; margin-bottom:20px;">
       <thead>
       <tr>
         <th>Methods</th>
         <th>Noisy input</th>
-        <th>Baseline</th>
-        <th>2CEM</th>
+        <th>Real CRUSE</th>
+        <th>Real CRUSE-agnostic</th>
+        <th>Real CRUSE-cleanPhase</th>
+        <th>Complex CRUSE</th>
+        <th>Complex CRUSE-agnostic</th>
+        <th>Complex CRUSE-cleanPhase</th>
         <th>Clean ref</th>
       </tr>
       </thead>
     <tbody>
-      <tr>
-        <td>Car, SNR=0</td>
-        <!-- noisy -->
-        <td  width="250">
-          <img src="./img/51697_clean305_fisb0+Fullsize_Car1_130Kmh_16khz_hp+SNR=0_noisy.png" width="250">
-          <audio src="./audio/51697_clean305_fisb0+Fullsize_Car1_130Kmh_16khz_hp+SNR=0_noisy.wav" controls="" style="width: 250px;"></audio>
-        </td>
-        <!-- cruse -->
-        <td  width="250">
-          <img src="./img/51697_clean305_fisb0+Fullsize_Car1_130Kmh_16khz_hp+SNR=0_original512.png" width="250">
-          <audio src="./audio/51697_clean305_fisb0+Fullsize_Car1_130Kmh_16khz_hp+SNR=0_original512.wav" controls="" style="width: 250px;"></audio>
-        </td>
-        <!-- with cem loss -->
-        <td  width="250">
-          <img src="./img/51697_clean305_fisb0+Fullsize_Car1_130Kmh_16khz_hp+SNR=0_original512_cemLoss.png" width="250">
-          <audio src="./audio/51697_clean305_fisb0+Fullsize_Car1_130Kmh_16khz_hp+SNR=0_original512_cemLoss.wav" controls="" style="width: 250px;"></audio>
-        </td>
-        <!-- clean ref -->
-        <td  width="250">
-          <img src="./img/51697_clean305_fisb0+Fullsize_Car1_130Kmh_16khz_hp+SNR=0_clean.png" width="250">
-          <audio src="./audio/51697_clean305_fisb0+Fullsize_Car1_130Kmh_16khz_hp+SNR=0_clean.wav" controls="" style="width: 250px;"></audio>
-        </td>
-      </tr>
-
-
-      <tr>
-        <td>City, SNR=5</td>
-        <!-- noisy -->
-        <td  width="250">
-          <img src="./img/27032_clean554_fpkt0_mwjg0+CITY1+SNR=5_noisy.png" width="250">
-          <audio src="./audio/27032_clean554_fpkt0_mwjg0+CITY1+SNR=5_noisy.wav" controls="" style="width: 250px;"></audio>
-        </td>
-        <!-- cruse -->
-        <td  width="250">
-          <img src="./img/27032_clean554_fpkt0_mwjg0+CITY1+SNR=5_original512.png" width="250">
-          <audio src="./audio/27032_clean554_fpkt0_mwjg0+CITY1+SNR=5_original512.wav" controls="" style="width: 250px;"></audio>
-        </td>
-        <!-- with cem loss -->
-        <td  width="250">
-          <img src="./img/27032_clean554_fpkt0_mwjg0+CITY1+SNR=5_original512_cemLoss.png" width="250">
-          <audio src="./audio/27032_clean554_fpkt0_mwjg0+CITY1+SNR=5_original512_cemLoss.wav" controls="" style="width: 250px;"></audio>
-        </td>
-        <!-- clean ref -->
-        <td  width="250">
-          <img src="./img/27032_clean554_fpkt0_mwjg0+CITY1+SNR=5_clean.png" width="250">
-          <audio src="./audio/27032_clean554_fpkt0_mwjg0+CITY1+SNR=5_clean.wav" controls="" style="width: 250px;"></audio>
-        </td>
-      </tr>
-
-
-      <tr>
-        <td>Cafe, SNR=5</td>
-        <!-- noisy -->
-        <td  width="250">
-          <img src="./img/49958_clean510_mrtk0_mcsh0+CAFE1+SNR=5_noisy.png" width="250">
-          <audio src="./audio/49958_clean510_mrtk0_mcsh0+CAFE1+SNR=5_noisy.wav" controls="" style="width: 250px;"></audio>
-        </td>
-        <!-- cruse -->
-        <td  width="250">
-          <img src="./img/49958_clean510_mrtk0_mcsh0+CAFE1+SNR=5_original512.png" width="250">
-          <audio src="./audio/49958_clean510_mrtk0_mcsh0+CAFE1+SNR=5_original512.wav" controls="" style="width: 250px;"></audio>
-        </td>
-        <!-- with cem loss -->
-        <td  width="250">
-          <img src="./img/49958_clean510_mrtk0_mcsh0+CAFE1+SNR=5_original512_cemLoss.png" width="250">
-          <audio src="./audio/49958_clean510_mrtk0_mcsh0+CAFE1+SNR=5_original512_cemLoss.wav" controls="" style="width: 250px;"></audio>
-        </td>
-        <!-- clean ref -->
-        <td  width="250">
-          <img src="./img/49958_clean510_mrtk0_mcsh0+CAFE1+SNR=5_clean.png" width="250">
-          <audio src="./audio/49958_clean510_mrtk0_mcsh0+CAFE1+SNR=5_clean.wav" controls="" style="width: 250px;"></audio>
-        </td>
-      </tr>
-
-      <tr>
-        <td>Cafe, SNR=10</td>
-        <!-- noisy -->
-        <td  width="250">
-          <img src="./img/49101_clean295_fgmd0_fhew0+CAFE2+SNR=10_noisy.png" width="250">
-          <audio src="./audio/49101_clean295_fgmd0_fhew0+CAFE2+SNR=10_noisy.wav" controls="" style="width: 250px;"></audio>
-        </td>
-        <!-- cruse -->
-        <td  width="250">
-          <img src="./img/49101_clean295_fgmd0_fhew0+CAFE2+SNR=10_original512.png" width="250">
-          <audio src="./audio/49101_clean295_fgmd0_fhew0+CAFE2+SNR=10_original512.wav" controls="" style="width: 250px;"></audio>
-        </td>
-        <!-- with cem loss -->
-        <td  width="250">
-          <img src="./img/49101_clean295_fgmd0_fhew0+CAFE2+SNR=10_original512_cemLoss.png" width="250">
-          <audio src="./audio/49101_clean295_fgmd0_fhew0+CAFE2+SNR=10_original512_cemLoss.wav" controls="" style="width: 250px;"></audio>
-        </td>
-        <!-- clean ref -->
-        <td  width="250">
-          <img src="./img/49101_clean295_fgmd0_fhew0+CAFE2+SNR=10_clean.png" width="250">
-          <audio src="./audio/49101_clean295_fgmd0_fhew0+CAFE2+SNR=10_clean.wav" controls="" style="width: 250px;"></audio>
-        </td>
-      </tr>
-
     </tbody>
   </table>
   </div>
 
-  <!-- <br/> -->
 
 
 <h4>References</h4>
-<div>
-  <ol class="reference">
-    <li>
-      S. Braun, H. Gamper, C. K. Reddy, and I. Tashev, “Towards efficient models for real-time deep noise suppression,” in <em>ICASSP 2021-2021 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>. IEEE, 2021, pp.656–660.
+<div style='font-size: 12;'>
+  <ol>
+    <li style="font-family: 'Times New Roman'">
+      Masuyama, Y., Yatabe, K., Nagatomo, K., & Oikawa, Y. (2022). Online phase reconstruction via DNN-based phase differences estimation. <em>IEEE/ACM Transactions on Audio, Speech, and Language Processing</em>, 31, 163-176.
     </li>
     
-    <li>
+    <!-- <li style="font-family: 'Times New Roman'">
       N. Raviv, O. Schwartz, and S. Gannot, “Low resources online single-microphone speech enhancement with harmonic emphasis,” in <em>ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>. IEEE, 2022, pp. 8807–8811.
-    </li>
+    </li> -->
   </ol>
 </div>
 
@@ -347,18 +215,18 @@ function topFunction() {
 function showNoisy(img) {
   var end = img.src.split('_');
   var end = end[end.length-1];
-  img.src = img.src.replace(end, 'noisy.png');
+  img.src = img.src.replace(end, '1noisy.png');
 }
 
 // show the original
 function showOriginal(img) {
-  img.src = img.src.replace('_noisy.png', img.method+'.png');
+  img.src = img.src.replace('_1noisy.png', img.method+'.png');
 }
 
 function enlargeImg(img) {
   if (img.className != 'enlarged'){
     // enlarge the image
-    img.src = img.src.replace('_noisy.png', img.method+'.png');
+    img.src = img.src.replace('_1noisy.png', img.method+'.png');
 	img.className='enlarged';
   } else {
     // reset
@@ -368,62 +236,123 @@ function enlargeImg(img) {
   img.style.transition = "transform 0.25s ease";
 }
 
-var methods = [
-'_noisy',
-'_basic',
-'_hamse',
-'_2CEM',
-'_2CEM50adp',
-'_mask12CEM',
-'_clean'
+var methodsSyn = [
+'_1noisy',
+'_realCruse',
+'_realCruse_syn',
+'_realCruse_agn_comb200',
+'_0clean'
 ];
 
-var filenames = [
-'51697_clean305_fisb0+Fullsize_Car1_130Kmh_16khz_hp+SNR=0',
-'27032_clean554_fpkt0_mwjg0+CITY1+SNR=5',
-'49958_clean510_mrtk0_mcsh0+CAFE1+SNR=5',
-'49101_clean295_fgmd0_fhew0+CAFE2+SNR=10',
+var filenamesSyn = [
+'cleanFileId1109_cafe_male_2_snr0dB',
+'cleanFileId5164_traffic_male_2_snr5dB',
+'cleanFileId546_cafe_male_1_snr10dB'
 ];
 
-var info = [
-'Car, SNR=0',
-'City, SNR=5', //*
-'Cafe, SNR=5',
-'Cafe, SNR=10',
+var infoSyn = [
+'Cafe, 0dB',
+'Traffic, 5dB',
+'Cafe, 10dB'
 ];
 
 const elementWidth = '250';
 
-var tbody = document.getElementById("samples");
-for (var i in filenames) {
+var tbody = document.getElementById("samplesSyn");
+for (var i in filenamesSyn) {
     var tr = document.createElement('tr');   
     tbody.appendChild(tr);
     var td = document.createElement('td');
-    td.innerHTML = info[i];
+    td.align="center";
+    td.innerHTML = infoSyn[i];
     tr.appendChild(td);
-
-    for (var j in methods) {
-      var td = document.createElement("td");
+    for (var j in methodsSyn) {
+      var td = document.createElement('td');
       td.width = elementWidth;
       tr.appendChild(td);
-      
-      // add the image
-      var img = document.createElement("img");
-      img.src = './img/'+filenames[i]+methods[j]+'.png';
-      img.method = methods[j];
-      // click effects
-      img.onmouseover = function() {showNoisy(this)};
-      img.onmouseout= function() {showOriginal(this)};
-	    img.onclick = function () {enlargeImg(this)};
-      img.width= elementWidth;
-      td.appendChild(img);
-
-      // add the audio
+    //   var img = document.createElement("img");
+    //   img.src = './img/'+filenamesSyn[i]+methodsSyn[j]+'.png';
+    //   img.method = methodsSyn[j];
+    //   img.onmouseover = function() {showNoisy(this)};
+    //   img.onmouseout= function() {showOriginal(this)};
+	  // img.onclick = function () {enlargeImg(this)};
+    //   img.width= elementWidth;
+    //   td.appendChild(img);
       var audio = document.createElement("audio");
-      audio.src ='./audio/'+filenames[i]+methods[j]+'.wav';
+      audio.src ='./audio/'+filenamesSyn[i]+methodsSyn[j]+'.wav';
       audio.controls = true;
       td.appendChild(audio);
       audio.style.width = elementWidth;
+
+    }
+    
+}
+
+var methodsAgn = [
+'_1noisy',
+'_realCruse',
+'_realCruse_agn_comb200',
+'_realCruse_cleanPhs',
+'_complexCruse',
+'_complexCruse_agn_comb200',
+'_complexCruse_cleanPhs',
+'_0clean'
+];
+
+var filenamesAgn = [
+'cleanFileId1109_cafe_male_1_snr0dB',
+'cleanFileId1109_cafe_male_2_snr0dB',
+'cleanFileId1109_cafe_female_1_snr0dB',
+'cleanFileId1880_traffic_female_1_snr0dB',
+'cleanFileId1880_traffic_female_2_snr0dB',
+'cleanFileId1042_cafe_male_1_snr5dB',
+'cleanFileId1042_cafe_male_2_snr5dB',
+'cleanFileId3656_traffic_male_1_snr5dB',
+'cleanFileId5164_traffic_male_1_snr5dB',
+'cleanFileId5164_traffic_male_2_snr5dB',
+'cleanFileId5164_traffic_female_1_snr5dB',
+'cleanFileId546_cafe_male_1_snr10dB',
+'cleanFileId546_cafe_female_1_snr10dB',
+'cleanFileId546_cafe_female_2_snr10dB',
+];
+
+var infoAgn = [
+'Cafe, SNR=0, #1',
+'Cafe, SNR=0, #2',
+'Cafe, SNR=0, #3',
+'Traffic, SNR=0, #1',
+'Traffic, SNR=0, #2',
+'Cafe, SNR=5, #1',
+'Cafe, SNR=5, #2',
+'Traffic, SNR=5, #1',
+'Traffic, SNR=5, #2',
+'Traffic, SNR=5, #3',
+'Traffic, SNR=5, #4',
+'Cafe, SNR=10, #1',
+'Cafe, SNR=10, #2',
+'Cafe, SNR=10, #3',
+];
+
+const elementWidthSmall = '210';
+
+var tbody = document.getElementById("samplesAgn");
+for (var i in filenamesAgn) {
+    var tr = document.createElement('tr');   
+    tbody.appendChild(tr);
+    var td = document.createElement('td');
+    td.align="center";
+    td.innerHTML = infoAgn[i];
+    tr.appendChild(td);
+    for (var j in methodsAgn) {
+      var td = document.createElement('td');
+      td.width = elementWidth;
+      tr.appendChild(td);
+      var audio = document.createElement("audio");
+      audio.src ='./audio/'+filenamesAgn[i]+methodsAgn[j]+'.wav';
+      console.log(audio.src)
+      audio.controls = true;
+      td.appendChild(audio);
+      audio.style.width = elementWidthSmall;
 
     }
     
