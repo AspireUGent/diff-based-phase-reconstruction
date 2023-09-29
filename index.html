@@ -1,7 +1,7 @@
 <html lang="en">
 
 <head>
-<title>Audio Samples</title>
+<title>SE phase reconstruction</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#ffffff">
 <style>
@@ -84,6 +84,10 @@
     z-index: 100;
   }
 
+  h4 {
+    color: #003366;
+  }
+
 </style>
 </head>
 
@@ -103,19 +107,32 @@
 </div>
 
 <div>
-  <h3>Audio samples </h3>
   <div>
-
-    This is the sample page for our submission <em>'Phase reconstruction in single channel speech enhancement based on phase gradients and estimated clean-speech amplitudes'</em> to ICASSP 2024.<br/>
+    <p style="color:#003366; list-style-type:disc; font-size=8;">
+    This is the sample page for our ICASSP 2024 submission <em>'Phase reconstruction in single channel speech enhancement based on phase gradients and estimated clean-speech amplitudes'</em>.<br/>
+  </p>
+  <p>
     <!-- Reference: <br/>
     <code>@article{}
     </code>
     <br/> -->
-    <br/>
-    First, we present the synthetic phase retrived by the algorithm proposed in [1] from the estimated clean speech magnitude, in comparison with the noisy phase. It can be observed that the full synthetic phase sounds artificial. 
-
+    We will demonstrate the benefit of the proposed method in the following three aspects:
+    <ul>
+      <li>First we show the improvement obtained by our proposed method, compared to the fully synthetic phase retrieval proposed in [1];</li>
+      <li>The improvement obtained compared to using the noisy phase;</li>
+      <li>Lastly, we consider the difference in performance when the phase reconstruction is trained specific to the speech enhancement approach (SE-matched) or independently thereof (SE-agnostic).</li>
+    </ul>
+  </p>
+    
   </div>
-	
+
+  <h4>Using synthesised phase [1] vs the proposed reconstructed phase</h4>
+  <div>
+    Here we see the effect of using the synthetic phase retrived by the algorithm proposed in [1]. <br/>
+
+    It may be observed that using the purely synthesised phase leads to an unnatural output, especially at high SNR, where the underlying signal phase is not heavily distorted by the noise. In comparison, our proposed method provides a more natural sounding output and the effect of the phase enhancement is perceivable especially in the voiced segments as having less "vocoding-like" artefacts. Since our method combines the predicted phase with that of the mixture signal, it helps preserve the naturalness when the underlying signal is less corrupted by noise. 
+  </div>
+    
   <div>
     <!-- <p style="color:#003366; list-style-type:disc; font-size=8; font-style: italic;">
 	  Hover your mouse on the spectrogram to check the noisy input. <br/>
@@ -140,9 +157,29 @@
 
   <br/>
 
+  <h4>Improvement by the proposed phase reconstruction</h4>
+
     <div>
 
-    Now, we focus on the difference between the noisy phase and the estimated phase. Two baselines are provided here, real-CRUSE which predicts a real-valued magnitude mask from noisy magnitude, and complex-CRUSE, which predicts a complex mask from real- and imaginary noisy STFT coefficients. The performance upper bound, the signal composed of the estimated magnitude and the clean signal phase, is also provided for reference. 
+    Now, we demonstrate the benefit of using the estimated phase obtained from the proposed method. <br/>
+    The samples below are processed by:
+    <ul>
+      <li><strong>Real CRUSE</strong>: CRUSE net [2] predicting a real-valued mask from the noisy magnitude;</li>
+      <li><strong>Real CRUSE - agnostic</strong>: reconstructing phase based on the magnitude estimated by real CRUSE. The DNNs for phase gradient estimation are trained in an SE-Agnostic manner, i.e., on magnitudes of <em>clean speech</em>;</li>
+      <li><strong>Real CRUSE - clean phase</strong>: combining the magnitude <em>estimated</em> by real CRUSE and the clean signal phase. We consider this the performance upper bound of phase reconstruction;</li>
+
+      <li><strong>Complex CRUSE</strong>: CRUSE net [2] predicting a complex mask. To enable a complex mask prediction, the network takes the real- and imaginary-part of the noisy STFT as input and employs hyperbolic tangent function as the final activation function. Other parts of the network and the traning scheme are kept the same as in [2];</li>
+      <li><strong>Complex CRUSE - agnostic</strong>: reconstructing phase based on the magnitude estimated by complex CRUSE. The DNNs for phase gradient estimation are trained in an SE-Agnostic manner, i.e., on magnitudes of <em>clean speech</em>;</li>
+      <li><strong>Complex CRUSE - clean phase</strong>: combining the magnitude <em>estimated</em> by complex CRUSE and the clean signal phase.  We consider this the performance upper bound of phase reconstruction;</li>
+      
+    </ul>
+    <!-- 
+    Two baselines are provided here, <strong>real CRUSE</strong> which predicts a real-valued magnitude mask from noisy magnitude, and <strong>complex CRUSE</strong>, which predicts a complex mask from real- and imaginary noisy STFT coefficients. <br/>
+    Based on the magnitude estimated by the CRUSE nets, the phase is reconstructed by the proposed method where the phase difference estimators are trained to retrieve phase difference from clean magnitude. Since these networks are agnostic to the precedent speech enhancement network, it is noted as <strong>agnostic</strong>. <br/>
+    Furthermore, the performance upper bound, the signal composed of the estimated magnitude and the <em>clean signal phase</em>, is also provided for reference. <br/> 
+ -->
+    Note that the effect of the phase reconstruction is best perceivable as reduction of "vocoding-like" artefacts, which occur when noise is present between harmonics. This is also visible in the spectra. <br/>
+    Obviously, if the initial phase estimate is good, less difference is be observed bewtween the speech estimate with the noisy phase and the one with the reconstructed phase.
 
   </div>
   
@@ -158,11 +195,11 @@
         <th>Methods</th>
         <th>Noisy input</th>
         <th>Real CRUSE</th>
-        <th>Real CRUSE-agnostic</th>
-        <th>Real CRUSE-cleanPhase</th>
+        <th>Real CRUSE - agnostic</th>
+        <th>Real CRUSE - clean phase</th>
         <th>Complex CRUSE</th>
-        <th>Complex CRUSE-agnostic</th>
-        <th>Complex CRUSE-cleanPhase</th>
+        <th>Complex CRUSE - agnostic</th>
+        <th>Complex CRUSE - clean phase</th>
         <th>Clean ref</th>
       </tr>
       </thead>
@@ -170,6 +207,8 @@
     </tbody>
   </table>
   </div>
+
+ <h4>Comparison between SE-matched and SE-agnostic</h4>
 
 
 
@@ -180,9 +219,9 @@
       Masuyama, Y., Yatabe, K., Nagatomo, K., & Oikawa, Y. (2022). Online phase reconstruction via DNN-based phase differences estimation. <em>IEEE/ACM Transactions on Audio, Speech, and Language Processing</em>, 31, 163-176.
     </li>
     
-    <!-- <li style="font-family: 'Times New Roman'">
+    <li style="font-family: 'Times New Roman'">
       N. Raviv, O. Schwartz, and S. Gannot, “Low resources online single-microphone speech enhancement with harmonic emphasis,” in <em>ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>. IEEE, 2022, pp. 8807–8811.
-    </li> -->
+    </li>
   </ol>
 </div>
 
@@ -300,37 +339,37 @@ var methodsAgn = [
 ];
 
 var filenamesAgn = [
-'cleanFileId1109_cafe_male_1_snr0dB',
-'cleanFileId1109_cafe_male_2_snr0dB',
-'cleanFileId1109_cafe_female_1_snr0dB',
-'cleanFileId1880_traffic_female_1_snr0dB',
-'cleanFileId1880_traffic_female_2_snr0dB',
-'cleanFileId1042_cafe_male_1_snr5dB',
-'cleanFileId1042_cafe_male_2_snr5dB',
-'cleanFileId3656_traffic_male_1_snr5dB',
-'cleanFileId5164_traffic_male_1_snr5dB',
-'cleanFileId5164_traffic_male_2_snr5dB',
-'cleanFileId3656_traffic_female_1_snr5dB',
-'cleanFileId546_cafe_male_1_snr10dB',
-'cleanFileId546_cafe_female_1_snr10dB',
-'cleanFileId546_cafe_female_2_snr10dB',
+// 'cleanFileId1109_cafe_male_1_snr0dB',
+'cleanFileId1109_cafe_snr0dB', //_male_2
+// 'cleanFileId1109_cafe_female_1_snr0dB',
+'cleanFileId1880_traffic_snr0dB', //female_1_
+// 'cleanFileId1880_traffic_female_2_snr0dB',
+'cleanFileId1042_cafe_snr5dB', //male_1_
+// 'cleanFileId1042_cafe_male_2_snr5dB',
+// 'cleanFileId3656_traffic_male_1_snr5dB',
+'cleanFileId5164_traffic_snr5dB', //_male_1
+// 'cleanFileId5164_traffic_male_2_snr5dB',
+// 'cleanFileId3656_traffic_female_1_snr5dB',
+// 'cleanFileId546_cafe_male_1_snr10dB',
+// 'cleanFileId546_cafe_female_1_snr10dB',
+'cleanFileId546_cafe_snr10dB', //_female_2
 ];
 
 var infoAgn = [
-'Cafe, SNR=0, #1',
-'Cafe, SNR=0, #2',
-'Cafe, SNR=0, #3',
-'Traffic, SNR=0, #1',
-'Traffic, SNR=0, #2',
-'Cafe, SNR=5, #1',
-'Cafe, SNR=5, #2',
-'Traffic, SNR=5, #1',
-'Traffic, SNR=5, #2',
-'Traffic, SNR=5, #3',
-'Traffic, SNR=5, #4',
-'Cafe, SNR=10, #1',
-'Cafe, SNR=10, #2',
-'Cafe, SNR=10, #3',
+// 'Cafe, SNR=0, #1',
+'Cafe, SNR=0',
+// 'Cafe, SNR=0, #3',
+'Traffic, SNR=0',
+// 'Traffic, SNR=0, #2',
+'Cafe, SNR=5',
+// 'Cafe, SNR=5, #2',
+// 'Traffic, SNR=5, #1',
+'Traffic, SNR=5',
+// 'Traffic, SNR=5, #3',
+// 'Traffic, SNR=5, #4',
+// 'Cafe, SNR=10, #1',
+// 'Cafe, SNR=10, #2',
+'Cafe, SNR=10',
 ];
 
 const elementWidthSmall = '210';
