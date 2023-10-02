@@ -32,6 +32,10 @@
     text-transform: capitalize;
   }
 
+  .no-italics {
+    font-style: normal;   
+}
+
   body {
     margin: 20;
     font-family: Arial, Helvetica, sans-serif;
@@ -179,8 +183,14 @@
     Furthermore, the performance upper bound, the signal composed of the estimated magnitude and the <em>clean signal phase</em>, is also provided for reference. <br/> 
  -->
     Note that the effect of the phase reconstruction is best perceivable as reduction of "vocoding-like" artefacts, which occur when noise is present between harmonics. This is also visible in the spectra. <br/>
-    Obviously, if the initial phase estimate is good, less difference is be observed bewtween the speech estimate with the noisy phase and the one with the reconstructed phase.
+    Obviously, if the initial phase estimate is good, less difference is be observed bewtween the speech estimate with the noisy phase and the one with the reconstructed phase. <br/>
 
+    <p style="color:#003366; list-style-type:disc; font-size=8; font-style: italic;">
+      For the ease of observation, we zoom all the spectrogram into <strong class='no-italics'>[0, 2] kHz</strong>. <br/>
+      Hover your mouse on the spectrogram to check the noisy input. <br/>
+      Click the spectrogram to enlarge/reset it.
+    </p>
+    
   </div>
   
   <div>
@@ -278,21 +288,31 @@ function enlargeImg(img) {
 var methodsSyn = [
 '_1noisy',
 '_realCruse',
-'_realCruse_syn',
-'_realCruse_agn_comb200',
+'_realCruse-syn',
+'_realCruse-agn-comb200',
 '_0clean'
 ];
 
 var filenamesSyn = [
 'cleanFileId1109_cafe_male_2_snr0dB',
+'cleanFileId7608_cafe_snr0dB',
 'cleanFileId5164_traffic_male_2_snr5dB',
-'cleanFileId546_cafe_male_1_snr10dB'
+'cleanFileId9557_traffic_snr5dB',
+'cleanFileId7964_cafe_snr5dB',
+'cleanFileId546_cafe_male_1_snr10dB',
+'cleanFileId8527_cafe_snr10dB',
+'cleanFileId9106_traffic_snr10dB'
 ];
 
 var infoSyn = [
-'Cafe, 0dB',
-'Traffic, 5dB',
-'Cafe, 10dB'
+'Cafe, 0dB #1',
+'cafe, 0dB #2',
+'Traffic, 5dB #1',
+'Traffic, 5dB #2',
+'Traffic, 5dB #3',
+'Cafe, 10dB #1',
+'Cafe, 10dB #2',
+'Traffic, 10db'
 ];
 
 const elementWidth = '250';
@@ -314,7 +334,7 @@ for (var i in filenamesSyn) {
     //   img.method = methodsSyn[j];
     //   img.onmouseover = function() {showNoisy(this)};
     //   img.onmouseout= function() {showOriginal(this)};
-	  // img.onclick = function () {enlargeImg(this)};
+	  //   img.onclick = function () {enlargeImg(this)};
     //   img.width= elementWidth;
     //   td.appendChild(img);
       var audio = document.createElement("audio");
@@ -330,11 +350,11 @@ for (var i in filenamesSyn) {
 var methodsAgn = [
 '_1noisy',
 '_realCruse',
-'_realCruse_agn_comb200',
-'_realCruse_cleanPhs',
+'_realCruse-agn-comb200',
+'_realCruse-cleanPhs',
 '_complexCruse',
-'_complexCruse_agn_comb200',
-'_complexCruse_cleanPhs',
+'_complexCruse-agn-comb200',
+'_complexCruse-cleanPhs',
 '_0clean'
 ];
 
@@ -384,8 +404,18 @@ for (var i in filenamesAgn) {
     tr.appendChild(td);
     for (var j in methodsAgn) {
       var td = document.createElement('td');
-      td.width = elementWidth;
+      td.width = elementWidthSmall;
       tr.appendChild(td);
+
+      img = document.createElement("img");
+      img.src = './img/'+filenamesAgn[i]+methodsAgn[j]+'.png';
+      img.method = methodsAgn[j];
+      img.onmouseover = function() {showNoisy(this)};
+      img.onmouseout= function() {showOriginal(this)};
+      img.onclick = function () {enlargeImg(this)};
+      img.width= elementWidthSmall;
+      td.appendChild(img);
+
       var audio = document.createElement("audio");
       audio.src ='./audio/'+filenamesAgn[i]+methodsAgn[j]+'.wav';
       console.log(audio.src)
