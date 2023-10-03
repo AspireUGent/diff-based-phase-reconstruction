@@ -130,15 +130,14 @@
     <code>@article{}
     </code>
     <br/> -->
-    We will demonstrate the benefit of the proposed method in the following three aspects:
+    We will demonstrate the benefit of the proposed method in the following two aspects:
     <ul>
       <li>First we show the improvement obtained by our proposed method, compared to the fully synthetic phase retrieval proposed in [1];</li>
-      <li>The improvement obtained compared to using the noisy phase;</li>
-      <li>Lastly, we consider the difference in performance when the phase reconstruction is trained specific to the speech enhancement approach (SE-matched) or independently thereof (SE-agnostic).</li>
+      <li>The improvement obtained compared to using the noisy phase (referred as 'agnostic' in our paper).</li>
     </ul>
 
     All the noisy samples are normalised to -26 dBov individually based on the active speech level (ASL).<br/>
-    We recommand using neutral sound headphone to better discern differences among the presented methods. 
+    We recommend using neutral sound headphone to better discern differences among the presented methods. 
  
   </p>
     
@@ -153,11 +152,7 @@
   </div>
     
   <div>
-    <!-- <p style="color:#003366; list-style-type:disc; font-size=8; font-style: italic;">
-	  Hover your mouse on the spectrogram to check the noisy input. <br/>
-	  Click the spectrogram to enlarge/reset it.
-    </p>
-	 -->
+
     <table class="tb" id="samplesSyn">
       <thead>
       <tr>
@@ -192,17 +187,13 @@
       <li><strong>Complex CRUSE - clean phase</strong>: combining the magnitude <em>estimated</em> by complex CRUSE and the clean signal phase.  We consider this the performance upper bound of phase reconstruction;</li>
       
     </ul>
-    <!-- 
-    Two baselines are provided here, <strong>real CRUSE</strong> which predicts a real-valued magnitude mask from noisy magnitude, and <strong>complex CRUSE</strong>, which predicts a complex mask from real- and imaginary noisy STFT coefficients. <br/>
-    Based on the magnitude estimated by the CRUSE nets, the phase is reconstructed by the proposed method where the phase difference estimators are trained to retrieve phase difference from clean magnitude. Since these networks are agnostic to the precedent speech enhancement network, it is noted as <strong>agnostic</strong>. <br/>
-    Furthermore, the performance upper bound, the signal composed of the estimated magnitude and the <em>clean signal phase</em>, is also provided for reference. <br/> 
- -->
+
     Note that the effect of the phase reconstruction is best perceivable as reduction of "vocoding-like" artefacts, which occur when noise is present between harmonics. This is also visible in the spectra. <br/>
     Obviously, if the initial phase estimate is good, less difference is be observed bewtween the speech estimate with the noisy phase and the one with the reconstructed phase. <br/>
 
     <p style="color:#003366; list-style-type:disc; font-size=8; font-style: italic;">
-      For the ease of observation, we zoom all the spectrogram into <strong class='no-italics'>[0, 2] kHz</strong>. <br/>
-      Hover your mouse on the spectrogram of the proposed method to check the noisy phase output. <br/>
+      For the ease of observation, we zoom all the spectrogram into <strong class='no-italics'>[0, 4] kHz</strong>. <br/>
+      <em>By moving your mouse over the spectrogram of the proposed method, you can see the difference to using the noisy phase. </em><br/>
       Click the spectrogram to enlarge/reset it.
     </p>
     
@@ -232,9 +223,6 @@
     </tbody>
   </table>
   </div>
-
- <h4>Comparison between SE-matched and SE-agnostic</h4>
-
 
 
 <h4>References</h4>
