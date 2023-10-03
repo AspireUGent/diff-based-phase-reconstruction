@@ -67,9 +67,9 @@
   
   th {
     align: center;
-	background-color: #3265C2;
-	color: white;
-	height: 30px;
+  	background-color: #3265C2;
+  	color: white;
+  	height: 30px;
   }
   
   tr {
@@ -187,7 +187,7 @@
 
     <p style="color:#003366; list-style-type:disc; font-size=8; font-style: italic;">
       For the ease of observation, we zoom all the spectrogram into <strong class='no-italics'>[0, 2] kHz</strong>. <br/>
-      Hover your mouse on the spectrogram to check the noisy input. <br/>
+      Hover your mouse on the spectrogram of the proposed method to check the noisy phase output. <br/>
       Click the spectrogram to enlarge/reset it.
     </p>
     
@@ -230,7 +230,7 @@
     </li>
     
     <li style="font-family: 'Times New Roman'">
-      N. Raviv, O. Schwartz, and S. Gannot, “Low resources online single-microphone speech enhancement with harmonic emphasis,” in <em>ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>. IEEE, 2022, pp. 8807–8811.
+      S. Braun, H. Gamper, C. K. Reddy, and I. Tashev, “Towards efficient models for real-time deep noise suppression,” in <em>ICASSP 2021-2021 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>. IEEE, 2021, pp.656–660.
     </li>
   </ol>
 </div>
@@ -260,16 +260,16 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 
-// show the noisy
+// show the noisy phase ver
 function showNoisy(img) {
-  var end = img.src.split('_');
-  var end = end[end.length-1];
-  img.src = img.src.replace(end, '1noisy.png');
+  img.src = img.src.replace('-agn-comb200', '');
 }
 
 // show the original
 function showOriginal(img) {
-  img.src = img.src.replace('_1noisy.png', img.method+'.png');
+  var end = img.src.split('_');
+  var end = '_'+end[end.length-1];
+  img.src = img.src.replace(end, img.method+'.png');
 }
 
 function enlargeImg(img) {
@@ -295,24 +295,16 @@ var methodsSyn = [
 
 var filenamesSyn = [
 'cleanFileId1109_cafe_male_2_snr0dB',
-// 'cleanFileId7608_cafe_snr0dB',
-'cleanFileId5164_traffic_male_2_snr5dB',
-// 'cleanFileId9557_traffic_snr5dB',
 'cleanFileId7964_cafe_snr5dB',
-// 'cleanFileId546_cafe_male_1_snr10dB',
 'cleanFileId8527_cafe_snr10dB',
-// 'cleanFileId9106_traffic_snr10dB'
+'cleanFileId5164_traffic_male_2_snr5dB',
 ];
 
 var infoSyn = [
-'Cafe, 0dB #1',
-// 'cafe, 0dB #2',
-'Traffic, 5dB #1',
-// 'Traffic, 5dB #2',
-'Traffic, 5dB #3',
-// 'Cafe, 10dB #1',
-'Cafe, 10dB #2',
-// 'Traffic, 10db'
+'Cafe, SNR=2.1dB',
+'Cafe, SNR=6.2dB',
+'Cafe, SNR=10dB',
+'Traffic, SNR=12.2dB',
 ];
 
 const elementWidth = '250';
@@ -360,9 +352,9 @@ var methodsAgn = [
 
 var filenamesAgn = [
 // 'cleanFileId1109_cafe_male_1_snr0dB',
+'cleanFileId1880_traffic_snr0dB', //female_1_
 'cleanFileId1109_cafe_snr0dB', //_male_2
 // 'cleanFileId1109_cafe_female_1_snr0dB',
-'cleanFileId1880_traffic_snr0dB', //female_1_
 // 'cleanFileId1880_traffic_female_2_snr0dB',
 'cleanFileId1042_cafe_snr5dB', //male_1_
 // 'cleanFileId1042_cafe_male_2_snr5dB',
@@ -377,19 +369,19 @@ var filenamesAgn = [
 
 var infoAgn = [
 // 'Cafe, SNR=0, #1',
-'Cafe, SNR=0',
+'Traffic, SNR=-0.1dB',
+'Cafe, SNR=2.1dB',
 // 'Cafe, SNR=0, #3',
-'Traffic, SNR=0',
 // 'Traffic, SNR=0, #2',
-'Cafe, SNR=5',
+'Cafe, SNR=8.2dB',
 // 'Cafe, SNR=5, #2',
 // 'Traffic, SNR=5, #1',
-'Traffic, SNR=5',
+'Traffic, SNR=10.1dB',
 // 'Traffic, SNR=5, #3',
 // 'Traffic, SNR=5, #4',
 // 'Cafe, SNR=10, #1',
 // 'Cafe, SNR=10, #2',
-'Cafe, SNR=10',
+'Cafe, SNR=12dB',
 ];
 
 const elementWidthSmall = '210';
@@ -410,15 +402,16 @@ for (var i in filenamesAgn) {
       img = document.createElement("img");
       img.src = './img/'+filenamesAgn[i]+methodsAgn[j]+'.png';
       img.method = methodsAgn[j];
-      img.onmouseover = function() {showNoisy(this)};
-      img.onmouseout= function() {showOriginal(this)};
-      img.onclick = function () {enlargeImg(this)};
+      if (methodsAgn[j].includes("agn")){
+        img.onmouseover = function() {showNoisy(this)};
+        img.onmouseout= function() {showOriginal(this)};
+      }
+        img.onclick = function () {enlargeImg(this)};
       img.width= elementWidthSmall;
       td.appendChild(img);
 
       var audio = document.createElement("audio");
       audio.src ='./audio/'+filenamesAgn[i]+methodsAgn[j]+'.wav';
-      console.log(audio.src)
       audio.controls = true;
       td.appendChild(audio);
       audio.style.width = elementWidthSmall;
