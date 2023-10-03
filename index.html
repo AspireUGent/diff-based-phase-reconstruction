@@ -72,8 +72,8 @@
     align: center;
 	  position: sticky;
     top: 0;
-    background-color: #3265C2;
-  	color: white;
+    background-color: white;
+  	color: #3265C2;
   	height: 30px;
   }
   
@@ -152,7 +152,7 @@
 
   </div>
     
-  <div id="managerTable">
+  <div>
     <!-- <p style="color:#003366; list-style-type:disc; font-size=8; font-style: italic;">
 	  Hover your mouse on the spectrogram to check the noisy input. <br/>
 	  Click the spectrogram to enlarge/reset it.
@@ -214,7 +214,7 @@
     Click the spectrogram to enlarge/reset it.
     </p>
    -->
-    <table class="tb" id="samplesAgn" id="managerTable">
+    <table class="tb" id="samplesAgn">
       <thead>
       <tr>
         <th>Methods</th>
@@ -336,14 +336,14 @@ for (var i in filenamesSyn) {
       var td = document.createElement('td');
       td.width = elementWidth;
       tr.appendChild(td);
-    //   var img = document.createElement("img");
-    //   img.src = './img/'+filenamesSyn[i]+methodsSyn[j]+'.png';
-    //   img.method = methodsSyn[j];
+      var img = document.createElement("img");
+      img.src = './img/'+filenamesSyn[i]+methodsSyn[j]+'.png';
+      img.method = methodsSyn[j];
     //   img.onmouseover = function() {showNoisy(this)};
     //   img.onmouseout= function() {showOriginal(this)};
-	  //   img.onclick = function () {enlargeImg(this)};
-    //   img.width= elementWidth;
-    //   td.appendChild(img);
+	    img.onclick = function () {enlargeImg(this)};
+      img.width= elementWidth;
+      td.appendChild(img);
       var audio = document.createElement("audio");
       audio.src ='./audio/'+filenamesSyn[i]+methodsSyn[j]+'.wav';
       audio.controls = true;
