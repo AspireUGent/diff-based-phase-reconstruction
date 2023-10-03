@@ -132,8 +132,8 @@
     <br/> -->
     We will demonstrate the benefit of the proposed method in the following two aspects:
     <ul>
-      <li>First we show the improvement obtained by our proposed method, compared to the fully synthetic phase retrieval proposed in [1];</li>
-      <li>The improvement obtained compared to using the noisy phase (referred as 'agnostic' in our paper).</li>
+      <li>First we show the improvement obtained by our proposed, speech enhancement agnostic method for phase estimation, compared to the fully synthetic phase retrieval proposed in [1];;</li>
+      <li>Secondly, we demonstrate the benefit of the proposed phase estimation applied on top of the speech enhancement approach.</li>
     </ul>
 
     All the noisy samples are normalised to -26 dBov individually based on the active speech level (ASL).<br/>
@@ -304,10 +304,10 @@ var filenamesSyn = [
 ];
 
 var infoSyn = [
-'Cafe, SNR=2.1dB',
-'Cafe, SNR=6.2dB',
+'Cafe, SNR=2dB',
+'Cafe, SNR=6dB',
 'Cafe, SNR=10dB',
-'Traffic, SNR=12.2dB',
+'Traffic, SNR=12dB',
 ];
 
 const elementWidth = '250';
@@ -372,14 +372,14 @@ var filenamesAgn = [
 
 var infoAgn = [
 // 'Cafe, SNR=0, #1',
-'Traffic, SNR=-0.1dB',
-'Cafe, SNR=2.1dB',
+'Traffic, SNR=0dB',
+'Cafe, SNR=2dB',
 // 'Cafe, SNR=0, #3',
 // 'Traffic, SNR=0, #2',
-'Cafe, SNR=8.2dB',
+'Cafe, SNR=8dB',
 // 'Cafe, SNR=5, #2',
 // 'Traffic, SNR=5, #1',
-'Traffic, SNR=10.1dB',
+'Traffic, SNR=10dB',
 // 'Traffic, SNR=5, #3',
 // 'Traffic, SNR=5, #4',
 // 'Cafe, SNR=10, #1',
