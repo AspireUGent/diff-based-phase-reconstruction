@@ -63,11 +63,16 @@
   
   table {
     border-collapse: collapse;
+    display:block;
+    margin-top:10px; 
+    margin-bottom:20px;
   }
   
   th {
     align: center;
-  	background-color: #3265C2;
+	  position: sticky;
+    top: 0;
+    background-color: #3265C2;
   	color: white;
   	height: 30px;
   }
@@ -75,6 +80,11 @@
   tr {
     border-bottom: 2px solid black;
   }
+
+  #managerTable {
+    max-height: 500px;
+    overflow: auto;
+}
   
   .original {
     transform: scale(1);
@@ -126,6 +136,10 @@
       <li>The improvement obtained compared to using the noisy phase;</li>
       <li>Lastly, we consider the difference in performance when the phase reconstruction is trained specific to the speech enhancement approach (SE-matched) or independently thereof (SE-agnostic).</li>
     </ul>
+
+    All the noisy samples are normalised to -26 dBov individually based on the active speech level (ASL).<br/>
+    We recommand using neutral sound headphone to better discern differences among the presented methods. 
+ 
   </p>
     
   </div>
@@ -134,16 +148,17 @@
   <div>
     Here we see the effect of using the synthetic phase retrived by the algorithm proposed in [1]. <br/>
 
-    It may be observed that using the purely synthesised phase leads to an unnatural output, especially at high SNR, where the underlying signal phase is not heavily distorted by the noise. In comparison, our proposed method provides a more natural sounding output and the effect of the phase enhancement is perceivable especially in the voiced segments as having less "vocoding-like" artefacts. Since our method combines the predicted phase with that of the mixture signal, it helps preserve the naturalness when the underlying signal is less corrupted by noise. 
+    It may be observed that using the purely synthesised phase leads to an unnatural output, especially at high SNR, where the underlying signal phase is not heavily distorted by the noise. In comparison, our proposed method provides a more natural sounding output and the effect of the phase enhancement is perceivable especially in the voiced segments as having less "vocoding-like" artefacts. Since our method combines the predicted phase with that of the mixture signal, it helps preserve the naturalness when the underlying signal is less corrupted by noise. <br/>
+
   </div>
     
-  <div>
+  <div id="managerTable">
     <!-- <p style="color:#003366; list-style-type:disc; font-size=8; font-style: italic;">
 	  Hover your mouse on the spectrogram to check the noisy input. <br/>
 	  Click the spectrogram to enlarge/reset it.
     </p>
 	 -->
-    <table class="tb" id="samplesSyn" style="margin-top:10px; margin-bottom:20px;">
+    <table class="tb" id="samplesSyn">
       <thead>
       <tr>
         <th>Methods</th>
@@ -199,7 +214,7 @@
     Click the spectrogram to enlarge/reset it.
     </p>
    -->
-    <table class="tb" id="samplesAgn" style="margin-top:10px; margin-bottom:20px;">
+    <table class="tb" id="samplesAgn" id="managerTable">
       <thead>
       <tr>
         <th>Methods</th>
