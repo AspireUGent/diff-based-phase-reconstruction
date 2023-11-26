@@ -85,6 +85,12 @@
     max-height: 500px;
     overflow: auto;
 }
+
+  .data-column {
+      align: center;
+      width: 150px;
+      text-align: center;
+  }
   
   .original {
     transform: scale(1);
@@ -125,6 +131,59 @@
     <p style="color:#003366; list-style-type:disc; font-size=8;">
     This is the sample page for our ICASSP 2024 submission <em>'Phase reconstruction in single channel speech enhancement based on phase gradients and estimated clean-speech amplitudes'</em>.<br/>
   </p>
+
+  <h4>Extra evaluation</h4>
+
+  <p>
+    We conducted a brief evaluation using the VoiceBank-Demand dataset in response to a review request, aiming to provide a comparative analysis with other research papers. The final two systems are reported by [3]. 
+  </p>
+  <div>
+    <table>
+      <thead>
+      <tr>
+        <th style="width: 150px;">Methods</th>
+        <th class="data-column">Csig</th>
+        <th class="data-column">Cbak</th>
+        <th class="data-column">Covl</th>
+      </tr>
+      </thead>
+    <tbody>
+      <tr>
+        <td>Noisy</td>
+        <td class="data-column">3.59</td>
+        <td class="data-column">3.00</td>
+        <td class="data-column">2.92</td>
+      </tr>
+      <tr>
+        <td>C-CRUSE</td>
+        <td class="data-column">4.16</td>
+        <td class="data-column">3.65</td>
+        <td class="data-column">3.58</td>
+      </tr>
+      <tr>
+        <td>C-CRUSE-Agn</td>
+        <td class="data-column">4.50</td>
+        <td class="data-column">4.05</td>
+        <td class="data-column">3.95</td>
+      </tr>
+
+      <tr>
+        <td>FRNet</td>
+        <td class="data-column">4.32</td>
+        <td class="data-column">3.53</td>
+        <td class="data-column">3.68</td>
+      </tr>
+      <tr>
+        <td>T-GSA</td>
+        <td class="data-column">4.18</td>
+        <td class="data-column">3.59</td>
+        <td class="data-column">3.62</td>
+      </tr>
+      
+    </tbody>
+  </table>
+  </div>
+
   <p>
     <!-- Reference: <br/>
     <code>@article{}
@@ -224,7 +283,6 @@
   </table>
   </div>
 
-
 <h4>References</h4>
 <div style='font-size: 12;'>
   <ol>
@@ -234,6 +292,10 @@
     
     <li style="font-family: 'Times New Roman'">
       S. Braun, H. Gamper, C. K. Reddy, and I. Tashev, “Towards efficient models for real-time deep noise suppression,” in <em>ICASSP 2021-2021 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>. IEEE, 2021, pp.656–660.
+    </li>
+
+    <li style="font-family: 'Times New Roman'">
+      Li, A., Zheng, C., Yu, G., Cai, J., & Li, X. "Filtering and refining: A collaborative-style framework for single-channel speech enhancement." <em>IEEE/ACM Transactions on Audio, Speech, and Language Processing</em>, (2022) 30, 2156-2172.
     </li>
   </ol>
 </div>
