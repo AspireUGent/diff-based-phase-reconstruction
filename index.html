@@ -132,16 +132,17 @@
     This is the sample page for our ICASSP 2024 submission <em>'Phase reconstruction in single channel speech enhancement based on phase gradients and estimated clean-speech amplitudes'</em>.<br/>
   </p>
 
-  <h4>Extra evaluation</h4>
+  <h3>Extra evaluation</h4>
 
   <p>
-    We conducted a brief evaluation using the VoiceBank-Demand dataset in response to a review request, aiming to provide a comparative analysis with other research papers. The final two systems are reported by [3]. 
+    The reviewer suggested us to compare our method with other methods such as [a] and [d] on the Voiceband-Demand dataset.
+    We conducted a brief evaluation of the proposed agnostic methods on the complex CRUSE (Complex CRUSE-agn) and report the results here in response to this requests. The last four systems in the table are reported by [a], including time-frequency domain methods [a,b,d] and time-domain method [c]. 
   </p>
   <div>
     <table>
       <thead>
       <tr>
-        <th style="width: 150px;">Methods</th>
+        <th style="width: 200px;">Methods</th>
         <th class="data-column">Csig</th>
         <th class="data-column">Cbak</th>
         <th class="data-column">Covl</th>
@@ -155,38 +156,42 @@
         <td class="data-column">2.92</td>
       </tr>
       <tr>
-        <td>C-CRUSE</td>
+        <td>Complex-CRUSE</td>
         <td class="data-column">4.16</td>
         <td class="data-column">3.65</td>
         <td class="data-column">3.58</td>
       </tr>
       <tr>
-        <td>C-CRUSE-Agn</td>
-        <td class="data-column">4.50</td>
-        <td class="data-column">4.05</td>
-        <td class="data-column">3.95</td>
+        <td>Complex-CRUSE-Agn</td>
+        <td class="data-column" style="font-weight:bold">4.50</td>
+        <td class="data-column" style="font-weight:bold">4.05</td>
+        <td class="data-column" style="font-weight:bold">3.95</td>
+      </tr>
+
+      <tr style="border-bottom:2px solid black">
+        <td colspan="100%"></td>
       </tr>
 
       <tr>
-        <td>PHASEN [4]</td>
+        <td>PHASEN [a]</td>
         <td class="data-column">4.21</td>
         <td class="data-column">3.55</td>
         <td class="data-column">3.62</td>
       </tr>
       <tr>
-        <td>T-GSA [5]</td>
+        <td>T-GSA [b]</td>
         <td class="data-column">4.18</td>
         <td class="data-column">3.59</td>
         <td class="data-column">3.62</td>
       </tr>
       <tr>
-        <td>TSTNN [6]</td>
+        <td>TSTNN [c]</td>
         <td class="data-column">4.17</td>
         <td class="data-column">3.53</td>
         <td class="data-column">3.49</td>
       </tr>
       <tr>
-        <td>FRNet [3]</td>
+        <td>FRNet [d]</td>
         <td class="data-column">4.32</td>
         <td class="data-column">3.53</td>
         <td class="data-column">3.68</td>
@@ -196,6 +201,28 @@
   </table>
   </div>
 
+  <h4>Baselines</h4>
+  <div style='font-size: 12;'>
+    <ol  type="a">
+      <li style="font-family: 'Times New Roman'">
+        Li, A., Zheng, C., Yu, G., Cai, J., & Li, X. "Filtering and refining: A collaborative-style framework for single-channel speech enhancement." <em>IEEE/ACM Transactions on Audio, Speech, and Language Processing</em>, (2022) 30, 2156-2172.
+      </li>
+
+      <li style="font-family: 'Times New Roman'">
+        Yin, D., Luo, C., Xiong, Z., & Zeng, W. PHASEN: A phase-and-harmonics-aware speech enhancement network. <em>Proceedings of the AAAI Conference on Artificial Intelligence</em>. 2020, Vol. 34, No. 05, pp. 9458-9465.
+      </li>
+
+      <li style="font-family: 'Times New Roman'">
+        Kim, J., El-Khamy, M., & Lee, J. T-GSA: Transformer with gaussian-weighted self-attention for speech enhancement. <em>ICASSP 2020-2020 IEEE International Conference on Acoustics, Speech and Signal Processing</em>. IEEE, 2020, pp. 6649-6653.
+      </li>
+
+      <li style="font-family: 'Times New Roman'">
+        Wang, K., He, B., & Zhu, W. P. TSTNN: Two-stage transformer based neural network for speech enhancement in the time domain. <em> ICASSP 2021-2021 IEEE International Conference on Acoustics, Speech and Signal Processing</em>. IEEE, 2021, pp. 7098-7102).
+      </li>
+    </ol>
+  </div>
+
+  <h3>Audio samples</h3>
   <p>
     <!-- Reference: <br/>
     <code>@article{}
@@ -306,26 +333,6 @@
     <!-- 2 -->
     <li style="font-family: 'Times New Roman'">
       S. Braun, H. Gamper, C. K. Reddy, and I. Tashev, “Towards efficient models for real-time deep noise suppression,” <em>ICASSP 2021-2021 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>. IEEE, 2021, pp. 656–660.
-    </li>
-
-    <!-- 3 -->
-    <li style="font-family: 'Times New Roman'">
-      Li, A., Zheng, C., Yu, G., Cai, J., & Li, X. "Filtering and refining: A collaborative-style framework for single-channel speech enhancement." <em>IEEE/ACM Transactions on Audio, Speech, and Language Processing</em>, (2022) 30, 2156-2172.
-    </li>
-
-    <!-- 4 -->
-    <li style="font-family: 'Times New Roman'">
-      Yin, D., Luo, C., Xiong, Z., & Zeng, W. PHASEN: A phase-and-harmonics-aware speech enhancement network. <em>Proceedings of the AAAI Conference on Artificial Intelligence</em>. 2020, Vol. 34, No. 05, pp. 9458-9465.
-    </li>
-
-    <!-- 5 -->
-    <li style="font-family: 'Times New Roman'">
-      Kim, J., El-Khamy, M., & Lee, J. T-GSA: Transformer with gaussian-weighted self-attention for speech enhancement. <em>ICASSP 2020-2020 IEEE International Conference on Acoustics, Speech and Signal Processing</em>. IEEE, 2020, pp. 6649-6653.
-    </li>
-
-    <!-- 6 -->
-    <li style="font-family: 'Times New Roman'">
-      Wang, K., He, B., & Zhu, W. P. TSTNN: Two-stage transformer based neural network for speech enhancement in the time domain. <em> ICASSP 2021-2021 IEEE International Conference on Acoustics, Speech and Signal Processing</em>. IEEE, 2021, pp. 7098-7102).
     </li>
 
   </ol>
